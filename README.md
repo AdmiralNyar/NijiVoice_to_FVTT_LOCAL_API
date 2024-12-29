@@ -1,0 +1,2 @@
+# NijiVoice_to_FVTT_LOCAL_API-
+にじボイスAPIとFoundryVTTのmodule Bouyomichan Connectorとやり取りをするためのデスクトップアプリ
