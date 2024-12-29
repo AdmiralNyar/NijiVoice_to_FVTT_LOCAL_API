@@ -8,7 +8,7 @@ a = Analysis(
     ['NijiVoice_to_Foundry.py'],
     pathex=[],
     binaries=[],
-    datas=[('./nvl.ico', 'image')],
+    datas=[],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -20,6 +20,7 @@ a = Analysis(
     noarchive=False,
 )
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+a.datas +=[('nvl.ico', './nvl.ico', 'Data')]
 
 exe = EXE(
     pyz,
@@ -49,3 +50,4 @@ coll = COLLECT(
     upx_exclude=[],
     name='NijiVoice_to_Foundry',
 )
+
