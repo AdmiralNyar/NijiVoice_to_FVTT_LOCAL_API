@@ -215,6 +215,21 @@ async def startup_event():
   logger.info("Start up sudio player...")
   asyncio.create_task(audio_player())
 
+def is_valid_folder_path(path):
+    if not path or not isinstance(path, str):
+        return False, "Path is empty or not a string."
+
+    # Windowsで禁止されている文字を確認
+    invalid_chars = '<>:"/\\|?*'
+    for char in invalid_chars:
+        if char in path:
+            return False, f"Path contains invalid character: '{char}'."
+
+    # 長さ制限（MAX_PATH: 260文字、例外設定がない場合）
+    if len(path) > 260:
+        return False, f"Path exceeds maximum length of 260 characters. Length: {len(path)}."
+
+    return True, None
 
 def save_audio(url, file_type, speaker, first_20_chars):
   with file_lock:
@@ -223,12 +238,12 @@ def save_audio(url, file_type, speaker, first_20_chars):
       dt = datetime.now()
       file_name = f"{dt.strftime('%Y%m%d%H%M%S')}_{first_20_chars}_{speaker}.{file_type}"
       folder_path = config.folder_path
-      path = os.path.abspath(folder_path)
-      if not os.path.isdir(folder_path):
-        raise ValueError(f"Invalid folder path: {folder_path}")
-      os.makedirs(path, exist_ok=True)
+      is_valid, reason = is_valid_folder_path(folder_path)
+      if not is_valid:
+        raise ValueError(f"Invalid folder path format: {folder_path}.Reason: {reason}")
+      os.makedirs(folder_path, exist_ok=True)
       re = fetch_with_retries(url)
-      file_path = os.path.join(path, file_name)
+      file_path = os.path.join(folder_path, file_name)
       with open(file_path, 'wb') as f:
         for chunk in re.iter_content(chunk_size=1024):
           if chunk:
@@ -412,7 +427,12 @@ def gui_lunch(key, path, setting, origin, file_type):
             config.access_key = value['-accesskey-']
             config.folder_setting = value["-dlsetting-"]
             if config.folder_setting:
-              config.folder_path = value["-folderpath-"]
+              is_valid, reason = is_valid_folder_path(value["-folderpath-"])
+              if not is_valid:
+                 sg.popup_error(f"保存先のフォルダの指定に誤りがあります。理由：{reason}")
+                 continue
+              else:
+                config.folder_path = value["-folderpath-"]
             else:
               config.folder_path = ""
 
