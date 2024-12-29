@@ -1,4 +1,4 @@
-# NijiVoice_to_FVTT_LOCAL_API-
+# NijiVoice_to_FVTT_LOCAL_API
 にじボイス[^1]APIとFoundryVTTのmodule [Bouyomichan Connector](https://github.com/AdmiralNyar/Bouyomichan-Connector)とやり取りをするためのデスクトップアプリです<br>
 当アプリは非公式なものであり、このアプリを使用した時のエラー等の問い合わせについてはこのGithubリポジトリにお願いします。<br>
 
@@ -79,6 +79,13 @@ Windows10[^2]で実行可能です(11は未検証)
 <br>
 
 15.Bouyomichan Connectorの設定については、[Bouyomichan Connectorの説明](https://github.com/AdmiralNyar/Bouyomichan-Connector)を参照してください（残クレジットの通知やにじボイスの資料の作製等について）
+<br>
+<br>
+
+# 出力音声について
+このNijiVoice_to_Foundry自体が、にじボイスAPIにより生成された音声ファイルURLデータを受け取った時に、その音声を自動再生しています。<br>
+音量（最大）を調整する場合やミキサーを使用する場合には、タスクバー上のWindowsのマークを右クリック＞「設定」＞「システム」＞「サウンド」＞「アプリの音量とデバイスの設定」から設定を変更できます。
+![アプリの音量とデバイスの設定](https://github.com/user-attachments/assets/116905e2-efaf-48de-aa8b-928f216f325e)
 <br>
 <br>
 
