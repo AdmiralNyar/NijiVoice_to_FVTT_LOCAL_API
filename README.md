@@ -82,8 +82,12 @@ Windows10[^2]で実行可能です(11は未検証)
 <br>
 <br>
 
-# EXE化
-実行形式ファイルが心配な人は、Python 3.10.4(32bit)にてPyInstaller(5.0.1)で`pyinstaller NijiVoice_to_Foundry.spec`を実行してください（NijiVoice_to_Foundry.pyファイル内でimportしているパッケージをインストールください）
+# EXEファイルについて
+現在、Windowsでは外部認証を受けていないアプリケーションについて一律に保護表示をするようになっています。外部認証には年額6万円ほどかかるため、このアプリは認証をしていません。<br>
+この画面が表示された場合、「詳細情報」をクリックすると「実行」ボタンが表示されるようになるので、実行してください。
+![SmartScreen](https://github.com/user-attachments/assets/c3d1693f-2dda-436b-bbf9-38388c299714)
+
+実行形式ファイルの中身が心配な人は、Python 3.10.4(32bit)にてPyInstaller(5.0.1)で`pyinstaller NijiVoice_to_Foundry.spec`を実行してください（NijiVoice_to_Foundry.pyファイル内でimportしているパッケージをインストールください）
 
 [^1]:にじボイスは株式会社Algomaticが運営するサービスです。
 [^2]:Windows10, Edgeは、MicrosoftCorporationの米国及びその他の国における商標または登録商標です。
