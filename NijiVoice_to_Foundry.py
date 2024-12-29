@@ -219,15 +219,19 @@ def is_valid_folder_path(path):
     if not path or not isinstance(path, str):
         return False, "Path is empty or not a string."
 
-    # Windowsで禁止されている文字を確認
-    invalid_chars = '<>:"/\\|?*'
-    for char in invalid_chars:
-        if char in path:
-            return False, f"Path contains invalid character: '{char}'."
-
     # 長さ制限（MAX_PATH: 260文字、例外設定がない場合）
     if len(path) > 260:
         return False, f"Path exceeds maximum length of 260 characters. Length: {len(path)}."
+
+    # ドライブレターを許容
+    if len(path) > 1 and path[1] == ":" and path[2:3] in {"\\", "/"}:
+        path = path[3:]  # ドライブレター部分を除外してチェック
+
+    # Windowsで禁止されている文字を確認
+    invalid_chars = '<>:"\\|?*'
+    for char in invalid_chars:
+        if char in path:
+            return False, f"Path contains invalid character: '{char}'."
 
     return True, None
 
